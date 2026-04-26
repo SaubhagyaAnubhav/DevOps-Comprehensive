@@ -17,7 +17,11 @@ app.use(express.json());
 
 app.use("/api/users", userRoutes);
 
-app.get(express_static(path.join(_dirname,"../frontend/dist")))
+const publicDir = path.join(__dirname, "public");
+app.use(express.static(publicDir));
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(publicDir, "index.html"));
+});
 
 const PORT = process.env.PORT || 5000;
 
