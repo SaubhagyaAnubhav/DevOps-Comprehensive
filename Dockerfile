@@ -10,6 +10,6 @@ WORKDIR /app
 COPY backend/package*.json ./
 RUN npm install
 COPY backend .
-COPY --fromfrontend-build /frontend/dist ../frontend/dist
+COPY --from=frontend-build /frontend/dist ../frontend/dist
 EXPOSE 5000
 CMD ["node", "server.js"]
